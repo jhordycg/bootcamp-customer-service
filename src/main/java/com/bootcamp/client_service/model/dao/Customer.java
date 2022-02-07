@@ -1,14 +1,14 @@
-package com.bootcamp.client_service.entity;
+package com.bootcamp.client_service.model.dao;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Getter
-@Setter
+@Data
+@Document
 public class Customer {
     @Id
-    private Long id;
+    private String id;
     private String fullName;
     private String mailAddress;
     private String address;

@@ -1,7 +1,7 @@
 package com.bootcamp.client_service.controller;
 
-import com.bootcamp.client_service.entity.Customer;
-import com.bootcamp.client_service.entity.CustomerType;
+import com.bootcamp.client_service.model.dao.Customer;
+import com.bootcamp.client_service.model.dao.CustomerType;
 import com.bootcamp.client_service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +14,7 @@ import javax.websocket.server.PathParam;
 @RequestMapping("customers")
 @RequiredArgsConstructor
 public class CustomerController {
+
     private final CustomerRepository repository;
 
     @GetMapping
@@ -37,7 +38,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public Mono<Void> delete(@PathVariable("id") Long id) {
+    public Mono<Void> delete(@PathVariable("id") String id) {
         return repository.deleteById(id);
     }
 }
