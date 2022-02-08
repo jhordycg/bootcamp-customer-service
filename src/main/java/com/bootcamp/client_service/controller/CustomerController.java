@@ -2,8 +2,10 @@ package com.bootcamp.client_service.controller;
 
 import com.bootcamp.client_service.model.dao.Customer;
 import com.bootcamp.client_service.model.dao.CustomerType;
-import com.bootcamp.client_service.repository.CustomerRepository;
+import com.bootcamp.client_service.model.dto.CustomerDto;
+import com.bootcamp.client_service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,34 +13,38 @@ import reactor.core.publisher.Mono;
 import javax.websocket.server.PathParam;
 
 @RestController
-@RequestMapping("customers")
+@RequestMapping("/customers")
 @RequiredArgsConstructor
 public class CustomerController {
 
-    private final CustomerRepository repository;
+    private final CustomerService service;
+    private final ModelMapper mapper;
 
     @GetMapping
-    public Flux<Customer> findAll() {
-        return repository.findAll();
+    public Flux<CustomerDto> findAll() {
+        return service.findAll().mapNotNull(customer -> mapper.map(customer, CustomerDto.class));
     }
 
     @GetMapping("/")
-    public Flux<Customer> findByType(@PathParam("type") CustomerType type) {
-        return repository.findAllByType(type);
+    public Flux<CustomerDto> findByType(@PathParam("type") CustomerType type) {
+        return service.findAllByType(type)
+                .mapNotNull(customer -> mapper.map(customer, CustomerDto.class));
     }
 
     @PostMapping
-    public Mono<Customer> save(@RequestBody Customer customer) {
-        return repository.save(customer);
+    public Mono<CustomerDto> create(@RequestBody Customer customer) {
+        return service.create(customer)
+                .mapNotNull(customerCreated -> mapper.map(customerCreated, CustomerDto.class));
     }
 
     @PutMapping("/{id}")
-    public Mono<Customer> edit(@PathVariable("id") Long id, @RequestBody Customer customer) {
-        return repository.save(customer);
+    public Mono<CustomerDto> update(@PathVariable String id, @RequestBody Customer customer) {
+        return service.update(id, customer)
+                .mapNotNull(customer1 -> mapper.map(customer1, CustomerDto.class));
     }
 
     @DeleteMapping("/{id}")
-    public Mono<Void> delete(@PathVariable("id") String id) {
-        return repository.deleteById(id);
+    public Mono<Void> delete(@PathVariable String id) {
+        return service.delete(id);
     }
 }
