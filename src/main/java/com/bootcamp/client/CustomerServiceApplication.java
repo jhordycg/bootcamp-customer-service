@@ -1,4 +1,4 @@
-package com.bootcamp.client_service;
+package com.bootcamp.client;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ClientServiceApplication {
+public class CustomerServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ClientServiceApplication.class, args);
+        SpringApplication.run(CustomerServiceApplication.class, args);
     }
 
     @Bean

@@ -1,13 +1,14 @@
-package com.bootcamp.client_service.service;
+package com.bootcamp.client.service;
 
-import com.bootcamp.client_service.model.dao.Customer;
-import com.bootcamp.client_service.model.dao.CustomerType;
+import com.bootcamp.client.model.dao.Customer;
+import com.bootcamp.client.model.dao.CustomerType;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Service
 public interface CustomerService {
+
+    Mono<Customer> findById(String id);
 
     Flux<Customer> findAll();
 

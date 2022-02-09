@@ -1,6 +1,6 @@
-package com.bootcamp.client_service.model.dto;
+package com.bootcamp.client.model.dto;
 
-import com.bootcamp.client_service.model.dao.CustomerType;
+import com.bootcamp.client.model.dao.CustomerType;
 import lombok.Getter;
 import lombok.Setter;
 

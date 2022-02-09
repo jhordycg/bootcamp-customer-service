@@ -1,11 +1,12 @@
-package com.bootcamp.client_service.controller;
+package com.bootcamp.client.controller;
 
-import com.bootcamp.client_service.model.dao.Customer;
-import com.bootcamp.client_service.model.dao.CustomerType;
-import com.bootcamp.client_service.model.dto.CustomerDto;
-import com.bootcamp.client_service.service.CustomerService;
+import com.bootcamp.client.model.dao.Customer;
+import com.bootcamp.client.model.dao.CustomerType;
+import com.bootcamp.client.model.dto.CustomerDto;
+import com.bootcamp.client.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,6 +24,12 @@ public class CustomerController {
     @GetMapping
     public Flux<CustomerDto> findAll() {
         return service.findAll().mapNotNull(customer -> mapper.map(customer, CustomerDto.class));
+    }
+
+    @GetMapping("/{id}")
+    public Mono<CustomerDto> findById(@PathVariable String id) {
+        return service.findById(id)
+                .mapNotNull(customer -> mapper.map(customer, CustomerDto.class));
     }
 
     @GetMapping("/")

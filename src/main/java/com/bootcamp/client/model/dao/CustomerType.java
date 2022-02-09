@@ -1,4 +1,4 @@
-package com.bootcamp.client_service.model.dao;
+package com.bootcamp.client.model.dao;
 
 public enum CustomerType {
     PERSONAL, BUSINESS, ALL
