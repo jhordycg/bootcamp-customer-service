@@ -1,6 +1,6 @@
 package com.bootcamp.client.model.dto;
 
-import com.bootcamp.client.model.dao.CustomerType;
+import com.bootcamp.client.model.dao.CustomerProfile;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +8,9 @@ import lombok.Setter;
 @Setter
 public class CustomerDto {
     private String id;
-    private String fullName;
-    private String mailAddress;
-    private String address;
-    private CustomerType type;
+    private String dni;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private CustomerProfile profile;
 }
